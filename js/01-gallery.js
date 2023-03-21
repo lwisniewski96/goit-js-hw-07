@@ -1,38 +1,46 @@
-// const createGalleryItems = () => {
-//   const items = _.range(0, 14);
-//   .map(() => {
 
-// });
-// console.log(createGalleryItems);
-// }
 
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
-const galleryElements = galleryItems
-  .map(
-    (item) =>
-      `<div class="gallery__item">
-<a class="gallery__link" href="${item.original}">
-<img
-class="gallery__image"
-src="${item.preview}"
-data-source= "${item.original}"
-alt= "${item.description}"
+// PIERWSZA CZESC ZADANIA
 
+// Wskazuje na istniejący kontener galerii z html i za pomocą querySelector wywołuje ( przechwycam)
 
+const galleryContainer = document.querySelector(".gallery");
 
-</a>
-</div>`
-  )
-  .join("");
+// galleryContainer.append(galleryElements);
 
-// const gallery = document.querySelector(".gallery");
-// const imagesHTML = galleryItems.map(({preview, oryginal, descryption})=>{
-// return "<div class="gallery__item"></div>
-// }
-// );
+galleryItems.forEach((item) => {
+  const newLi = `<div class="gallery__item">
+                  <a class="gallery__link">
+                    <img
+                      class="gallery__image"
+                      src="${item.preview}"
+                      data-source= "${item.original}"
+                      alt= "${item.description}"
+                      >
+                  </a>
+                </div>`;
+  galleryContainer.insertAdjacentHTML("beforeend", newLi);
+});
 
-console.log(gallery);
-console.log(galleryItems);
-console.log(newGallery);
+// 2 CZESC ZADANIA i 4 CZESC ZADANIA
+
+galleryContainer.addEventListener("click", (event) => {
+  let originPhoto = event.target.getAttribute("data-source");
+  const instance = basicLightbox.create(`
+  <div class="modal">
+     <img src="${originPhoto}">
+  </div>
+`);
+
+  instance.show();
+
+  console.log(event.target.getAttribute("data-source"));
+});
+
+// 3 CZESC ZADANIA- wgralem w html skrypty
+
+// console.log(galleryContainer);
+// console.log(galleryElements);
